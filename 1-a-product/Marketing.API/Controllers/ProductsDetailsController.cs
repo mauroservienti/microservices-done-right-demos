@@ -6,10 +6,11 @@ using System.Web.Http;
 
 namespace Marketing.API.Controllers
 {
-    [RoutePrefix("api/orders")]
+    [RoutePrefix("api/products")]
     public class ProductsDetailsController : ApiController
     {
         [HttpGet]
+        [Route("details/{id}")]
         public dynamic Get(int id)
         {
             using (var db = new MarketingContext())
@@ -23,6 +24,7 @@ namespace Marketing.API.Controllers
         }
 
         [HttpGet]
+        [Route("details")]
         public IEnumerable<dynamic> Get(int pageIndex, int pageSize)
         {
             using (var db = new MarketingContext())
