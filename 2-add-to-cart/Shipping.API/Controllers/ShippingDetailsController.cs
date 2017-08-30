@@ -1,6 +1,6 @@
-﻿using System.Linq;
+﻿using Shipping.Data.Context;
+using System.Linq;
 using System.Web.Http;
-using Shipping.Data.Context;
 
 namespace Shipping.API.Controllers
 {
