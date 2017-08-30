@@ -32,6 +32,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Warehouse.ViewModelComposit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{D489730A-F270-40F0-8FD3-2479C744AB7F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shipping.Data", "Shipping.Data\Shipping.Data.csproj", "{5B3F8E09-72CE-4101-AFAB-F0F721A4EF89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shipping.API", "Shipping.API\Shipping.API.csproj", "{7432A0A8-39F3-4829-A55E-B7CE26B83207}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -94,6 +98,14 @@ Global
 		{D489730A-F270-40F0-8FD3-2479C744AB7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D489730A-F270-40F0-8FD3-2479C744AB7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D489730A-F270-40F0-8FD3-2479C744AB7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B3F8E09-72CE-4101-AFAB-F0F721A4EF89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B3F8E09-72CE-4101-AFAB-F0F721A4EF89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B3F8E09-72CE-4101-AFAB-F0F721A4EF89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B3F8E09-72CE-4101-AFAB-F0F721A4EF89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7432A0A8-39F3-4829-A55E-B7CE26B83207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7432A0A8-39F3-4829-A55E-B7CE26B83207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7432A0A8-39F3-4829-A55E-B7CE26B83207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7432A0A8-39F3-4829-A55E-B7CE26B83207}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
