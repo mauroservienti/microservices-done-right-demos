@@ -24,7 +24,7 @@ namespace Sales.ViewModelComposition
         {
             var id = (string)routeData.Values["id"];
 
-            var url = $"http://localhost:20296/api/products/price/{id}";
+            var url = $"http://localhost:20296/api/prices/product/{id}";
             var client = new HttpClient();
             var response = await client.GetAsync(url).ConfigureAwait(false);
 

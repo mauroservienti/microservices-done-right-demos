@@ -4,11 +4,11 @@ using Shipping.Data.Context;
 
 namespace Shipping.API.Controllers
 {
-    [RoutePrefix("api/products")]
+    [RoutePrefix("api/shipping-details")]
     public class ShippingDetailsController : ApiController
     {
         [HttpGet]
-        [Route("shippingdetails/{id}")]
+        [Route("product/{id}")]
         public dynamic Get(int id)
         {
             using (var db = new ShippingContext())

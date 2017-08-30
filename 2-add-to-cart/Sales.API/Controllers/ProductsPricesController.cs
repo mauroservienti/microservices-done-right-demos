@@ -4,11 +4,11 @@ using System.Web.Http;
 
 namespace Sales.API.Controllers
 {
-    [RoutePrefix("api/products")]
+    [RoutePrefix("api/prices")]
     public class ProductsPricesController : ApiController
     {
         [HttpGet]
-        [Route("price/{id}")]
+        [Route("product/{id}")]
         public dynamic Get(int id)
         {
             using (var db = new SalesContext())

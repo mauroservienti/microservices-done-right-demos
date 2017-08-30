@@ -4,11 +4,11 @@ using Warehouse.Data.Context;
 
 namespace Warehouse.API.Controllers
 {
-    [RoutePrefix("api/stockitems")]
+    [RoutePrefix("api/stockitems-status")]
     public class ProductsPricesController : ApiController
     {
         [HttpGet]
-        [Route("status/{id}")]
+        [Route("product/{id}")]
         public dynamic Get(int id)
         {
             using (var db = new WarehouseContext())

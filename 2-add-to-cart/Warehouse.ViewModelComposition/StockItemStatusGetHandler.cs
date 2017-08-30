@@ -24,7 +24,7 @@ namespace Warehouse.ViewModelComposition
         {
             var id = (string)routeData.Values["id"];
 
-            var url = $"http://localhost:20297/api/stockitems/status/{id}";
+            var url = $"http://localhost:20297/api/stockitems-status/product/{id}";
             var client = new HttpClient();
             var response = await client.GetAsync(url).ConfigureAwait(false);
 
