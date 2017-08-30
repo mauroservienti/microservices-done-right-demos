@@ -8,3 +8,7 @@ GO
 IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'1-Sales')
 DROP DATABASE [1-Sales]
 GO
+
+IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'1-Warehouse')
+DROP DATABASE [1-Warehouse]
+GO
