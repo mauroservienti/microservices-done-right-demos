@@ -4,11 +4,11 @@ using System.Web.Http;
 
 namespace Marketing.API.Controllers
 {
-    [RoutePrefix("api/products")]
+    [RoutePrefix("api/product-details")]
     public class ProductsDetailsController : ApiController
     {
         [HttpGet]
-        [Route("details/{id}")]
+        [Route("product/{id}")]
         public dynamic Get(int id)
         {
             using (var db = new MarketingContext())
