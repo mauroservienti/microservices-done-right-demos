@@ -25,3 +25,7 @@ GO
 IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'2-Warehouse')
 DROP DATABASE [2-Warehouse]
 GO
+
+IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'2-Shipping')
+DROP DATABASE [2-Shipping]
+GO

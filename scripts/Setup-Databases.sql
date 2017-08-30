@@ -24,3 +24,7 @@ GO
 IF  NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'2-Warehouse')
 CREATE DATABASE [2-Warehouse]
 GO
+
+IF  NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'2-Shipping')
+CREATE DATABASE [2-Shipping]
+GO
