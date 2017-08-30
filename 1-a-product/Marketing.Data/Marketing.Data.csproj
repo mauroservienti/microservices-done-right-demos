@@ -54,7 +54,7 @@
   <ItemGroup>
     <Compile Include="Context\MarketingContext.cs" />
     <Compile Include="Migrations\DatabaseInitializer.cs" />
-    <Compile Include="Migrations\SeedData.cs" />
+    <Compile Include="Migrations\InitialData.cs" />
     <Compile Include="Models\ProductDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

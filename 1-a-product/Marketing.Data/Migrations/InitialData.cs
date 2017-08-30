@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Marketing.Data.Migrations
 {
-    internal static class SeedData
+    internal static class Initial
     {
-        internal static IEnumerable<ProductDetails> ProductDetails()
+        internal static IEnumerable<ProductDetails> Data()
         {
             yield return new ProductDetails()
             {

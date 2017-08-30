@@ -9,7 +9,7 @@ namespace Marketing.Data.Migrations
     {
         protected override void Seed(MarketingContext context)
         {
-            context.ProductsDetails.AddOrUpdate(k => k.Id, SeedData.ProductDetails().ToArray());
+            context.ProductsDetails.AddOrUpdate(k => k.Id, Initial.Data().ToArray());
         }
     }
 }
