@@ -113,7 +113,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Marketing.Data\Marketing.Data.csproj">
       <Project>{80f82f7d-3f0a-4316-87cd-49f19dbd5b85}</Project>
-      <Name>Divergent.Sales.Data</Name>
+      <Name>Marketing.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
