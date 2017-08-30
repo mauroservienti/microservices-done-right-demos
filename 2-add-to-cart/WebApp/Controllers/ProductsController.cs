@@ -8,5 +8,11 @@ namespace WebApp.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult AddToCart(int id)
+        {
+            return View();
+        }
     }
 }
