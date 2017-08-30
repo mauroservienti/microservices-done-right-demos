@@ -56,6 +56,7 @@
     <Compile Include="Migrations\DatabaseInitializer.cs" />
     <Compile Include="Migrations\InitialData.cs" />
     <Compile Include="Models\ShippingDetails.cs" />
+    <Compile Include="Models\ShoppingCartItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

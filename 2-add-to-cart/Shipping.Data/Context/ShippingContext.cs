@@ -12,11 +12,14 @@ namespace Shipping.Data.Context
 
         public IDbSet<ShippingDetails> ProductsShippingDetails { get; set; }
 
+        public IDbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             Database.SetInitializer(new DatabaseInitializer());
 
             modelBuilder.Entity<ShippingDetails>();
+            modelBuilder.Entity<ShoppingCartItem>();
 
             base.OnModelCreating(modelBuilder);
         }
