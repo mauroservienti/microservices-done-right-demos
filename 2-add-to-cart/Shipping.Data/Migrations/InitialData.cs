@@ -10,15 +10,15 @@ namespace Shipping.Data.Migrations
             yield return new ShippingDetails()
             {
                 ProductId = 1,
-                Price = 2.50m,
-                EligibleForFreeShipping = false
+                Cost = 2.50m,
+                FreeShippingEligible = false
             };
 
             yield return new ShippingDetails()
             {
                 ProductId = 2,
-                Price = 0.00m,
-                EligibleForFreeShipping = true
+                Cost = 0.00m,
+                FreeShippingEligible = true
             };
         }
 

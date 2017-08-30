@@ -6,8 +6,8 @@
 
         public int ProductId { get; set; }
 
-        public decimal Price{ get; set; }
+        public decimal Cost { get; set; }
 
-        public bool EligibleForFreeShipping { get; set; }
+        public bool FreeShippingEligible { get; set; }
     }
 }

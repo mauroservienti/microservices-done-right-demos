@@ -6,7 +6,7 @@ namespace Shipping.Data.Context
 {
     public class ShippingContext : DbContext
     {
-        public ShippingContext() : base("Shpping")
+        public ShippingContext() : base("Shipping")
         {
         }
 
