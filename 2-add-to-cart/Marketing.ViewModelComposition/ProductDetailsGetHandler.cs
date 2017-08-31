@@ -20,7 +20,7 @@ namespace Marketing.ViewModelComposition
                    && routeData.Values.ContainsKey("id");
         }
 
-        public async Task HandleAsync(dynamic vm, RouteData routeData, HttpRequest request)
+        public async Task Handle(dynamic vm, RouteData routeData, HttpRequest request)
         {
             var id = (string)routeData.Values["id"];
 

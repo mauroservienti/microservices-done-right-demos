@@ -27,7 +27,7 @@ namespace ITOps.ViewModelComposition.Gateway
             {
                 pending.Add
                 (
-                    handler.HandleAsync(vm, routeData, request)
+                    handler.Handle(vm, routeData, request)
                 );
             }
 
