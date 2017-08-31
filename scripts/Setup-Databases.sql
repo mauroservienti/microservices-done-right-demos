@@ -28,3 +28,19 @@ GO
 IF  NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'2-Shipping')
 CREATE DATABASE [2-Shipping]
 GO
+
+IF  NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'3-Marketing')
+CREATE DATABASE [3-Marketing]
+GO
+
+IF  NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'3-Sales')
+CREATE DATABASE [3-Sales]
+GO
+
+IF  NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'3-Warehouse')
+CREATE DATABASE [3-Warehouse]
+GO
+
+IF  NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'3-Shipping')
+CREATE DATABASE [3-Shipping]
+GO
