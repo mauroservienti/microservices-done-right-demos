@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -37,10 +38,26 @@ namespace ITOps.ViewModelComposition.Gateway
             }
             else
             {
-                await Task.WhenAll(pending);
+                try
+                {
+                    await Task.WhenAll(pending);
+                }
+                catch (Exception ex)
+                {
+                    var errorHandlers = matching.OfType<IHandleRequestsErrors>();
+                    if (errorHandlers.Any())
+                    {
+                        foreach (var handler in errorHandlers)
+                        {
+                            await handler.OnRequestError(ex, vm, routeData, request);
+                        }
+                    }
 
-                return (vm, StatusCodes.Status200OK);
+                    throw;
+                }
             }
+
+            return (vm, StatusCodes.Status200OK);
         }
     }
 }

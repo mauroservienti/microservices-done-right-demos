@@ -1,5 +1,4 @@
 ﻿using ITOps.ViewModelComposition;
-using ITOps.ViewModelComposition.Json;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Newtonsoft.Json;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Shipping.ViewModelComposition
 {
-    class AddToCartPostHandler : IHandleRequests
+    class AddToCartPostHandler : IHandleRequests, IHandleRequestsErrors
     {
         public bool Matches(RouteData routeData, string httpVerb, HttpRequest request)
         {
@@ -39,6 +38,12 @@ namespace Shipping.ViewModelComposition
             {
                 throw new InvalidOperationException(response.ReasonPhrase);
             }
+        }
+
+        public Task OnRequestError(Exception ex, dynamic vm, RouteData routeData, HttpRequest request)
+        {
+            //NOP
+            return Task.CompletedTask;
         }
     }
 }
