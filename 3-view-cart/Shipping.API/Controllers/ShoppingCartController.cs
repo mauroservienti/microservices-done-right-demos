@@ -1,5 +1,7 @@
 ﻿using Shipping.Data.Context;
 using Shipping.Data.Models;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -22,18 +24,47 @@ namespace Shipping.API.Controllers
                     .Where(o => o.ProductId == productId)
                     .Single();
 
-                var cartItem = new ShoppingCartItem()
+                var cartItem = db.ShoppingCartItems
+                    .Where(o => o.ProductId == productId)
+                    .SingleOrDefault();
+                if (cartItem == null)
                 {
-                    CartId= cartId,
-                    ProductId = productId,
-                    ShippingCost = shippingDetails.Cost,
-                    FreeShippingEligible = shippingDetails.FreeShippingEligible
-                };
+                    cartItem = new ShoppingCartItem()
+                    {
+                        CartId = cartId,
+                        ProductId = productId,
+                        ShippingCost = shippingDetails.Cost,
+                        FreeShippingEligible = shippingDetails.FreeShippingEligible
+                    };
+                    db.ShoppingCartItems.Add(cartItem);
+                }
 
-                db.ShoppingCartItems.Add(cartItem);
+                cartItem.Quantity++;
+                if (!cartItem.FreeShippingEligible && cartItem.Quantity > 1)
+                {
+                    var cost = cartItem.ShippingCost;
+                    var qty = cartItem.Quantity;
+                    cartItem.ShippingCost += (cost * qty) / 100;
+                }
+                
                 await db.SaveChangesAsync();
             }
             return StatusCode(HttpStatusCode.OK);
+        }
+
+        [HttpGet]
+        [Route("api/shopping-cart/products/{ids}")]
+        public IEnumerable<dynamic> GetCart(string ids)
+        {
+            using (var db = new ShippingContext())
+            {
+                var productIds = ids.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToArray();
+                var items = db.ShoppingCartItems
+                    .Where(item => productIds.Any(id => id == item.ProductId))
+                    .ToArray();
+
+                return items;
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = Model.ProductName;
 }
 <div class="jumbotron">
     <form action="/products/addtocart/@Model.ProductId" method="post">

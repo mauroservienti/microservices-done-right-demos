@@ -1,4 +1,6 @@
 ﻿using Shipping.Data.Context;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
@@ -18,6 +20,21 @@ namespace Shipping.API.Controllers
                     .SingleOrDefault();
 
                 return item;
+            }
+        }
+
+        [HttpGet]
+        [Route("products/{ids}")]
+        public IEnumerable<dynamic> Get(string ids)
+        {
+            using (var db = new ShippingContext())
+            {
+                var productIds = ids.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToArray();
+                var items = db.ProductsShippingDetails
+                    .Where(status => productIds.Any(id => id == status.ProductId))
+                    .ToArray();
+
+                return items;
             }
         }
     }
