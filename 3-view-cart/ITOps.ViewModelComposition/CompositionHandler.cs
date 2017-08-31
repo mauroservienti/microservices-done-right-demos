@@ -3,11 +3,10 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ITOps.ViewModelComposition.Gateway
+namespace ITOps.ViewModelComposition
 {
     public class CompositionHandler
     {
@@ -16,48 +15,60 @@ namespace ITOps.ViewModelComposition.Gateway
             var pending = new List<Task>();
             var routeData = context.GetRouteData();
             var request = context.Request;
-            var vm = new ExpandoObject();
+            var vm = new DynamicViewModel(routeData, request);
             var interceptors = context.RequestServices.GetServices<IInterceptRoutes>();
 
-            //matching interceptors could be cached by URL
-            var matching = interceptors
-                .Where(a => a.Matches(routeData, request.Method, request))
-                .ToArray();
+            try
+            {
+                //matching interceptors could be cached by URL
+                var matching = interceptors
+                    .Where(a => a.Matches(routeData, request.Method, request))
+                    .ToArray();
 
-            foreach (var handler in matching.OfType<IHandleRequests>())
-            {
-                pending.Add
-                (
-                    handler.Handle(vm, routeData, request)
-                );
-            }
-
-            if (pending.Count == 0)
-            {
-                return (null, StatusCodes.Status404NotFound);
-            }
-            else
-            {
-                try
+                foreach (var subscriber in matching.OfType<ISubscribeToCompositionEvents>())
                 {
-                    await Task.WhenAll(pending);
+                    subscriber.Subscribe(vm, routeData, request);
                 }
-                catch (Exception ex)
+
+                foreach (var handler in matching.OfType<IHandleRequests>())
                 {
-                    var errorHandlers = matching.OfType<IHandleRequestsErrors>();
-                    if (errorHandlers.Any())
+                    pending.Add
+                    (
+                        handler.Handle(vm, routeData, request)
+                    );
+                }
+
+                if (pending.Count == 0)
+                {
+                    return (null, StatusCodes.Status404NotFound);
+                }
+                else
+                {
+                    try
                     {
-                        foreach (var handler in errorHandlers)
-                        {
-                            await handler.OnRequestError(ex, vm, routeData, request);
-                        }
+                        await Task.WhenAll(pending);
                     }
+                    catch (Exception ex)
+                    {
+                        var errorHandlers = matching.OfType<IHandleRequestsErrors>();
+                        if (errorHandlers.Any())
+                        {
+                            foreach (var handler in errorHandlers)
+                            {
+                                await handler.OnRequestError(ex, vm, routeData, request);
+                            }
+                        }
 
-                    throw;
+                        throw;
+                    }
                 }
-            }
 
-            return (vm, StatusCodes.Status200OK);
+                return (vm, StatusCodes.Status200OK);
+            }
+            finally
+            {
+                vm.CleanupSubscribers();
+            }
         }
     }
 }
