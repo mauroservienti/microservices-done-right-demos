@@ -63,6 +63,9 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NServiceBus.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NServiceBus.6.4.0\lib\net452\NServiceBus.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
@@ -104,6 +107,7 @@
     <Compile Include="Controllers\ProductsPricesController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceBus.cs" />
     <Compile Include="ServiceHost.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -115,6 +119,10 @@
     <ProjectReference Include="..\Sales.Data\Sales.Data.csproj">
       <Project>{c38d4793-32c7-4bf7-98c0-1bf1a48e9e89}</Project>
       <Name>Sales.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sales.Messages.Events\Sales.Messages.Events.csproj">
+      <Project>{4B297FEE-EDB2-4CDC-B784-BBB269822C6C}</Project>
+      <Name>Sales.Messages.Events</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

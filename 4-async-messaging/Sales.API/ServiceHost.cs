@@ -13,15 +13,15 @@ namespace Sales.API
             var baseAddress = ConfigurationManager.AppSettings["baseAddress"];
 
             webApp = WebApp.Start<Startup>(url: baseAddress);
+            ServiceBus.Start();
+
             Console.WriteLine($"Sales.API listening on {baseAddress}");
         }
 
         public void Stop()
         {
-            if (webApp != null)
-            {
-                webApp.Dispose();
-            }
+            webApp?.Dispose();
+            ServiceBus.Instance?.Stop().GetAwaiter().GetResult();
         }
     }
 }

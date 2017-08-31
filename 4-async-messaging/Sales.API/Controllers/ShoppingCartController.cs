@@ -1,5 +1,7 @@
-﻿using Sales.Data.Context;
+﻿using NServiceBus;
+using Sales.Data.Context;
 using Sales.Data.Models;
+using Sales.Messages.Events;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -51,6 +53,12 @@ namespace Sales.API.Controllers
                 cartItem.Quantity++;
 
                 await db.SaveChangesAsync();
+
+                await ServiceBus.Instance.Publish<ProductAddedToCart>(e => 
+                {
+                    e.CartId = cartId;
+                    e.ProductId = productId;
+                });
             }
 
             return StatusCode(HttpStatusCode.OK);
