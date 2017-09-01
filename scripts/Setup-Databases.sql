@@ -60,3 +60,19 @@ GO
 IF  NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'4-Shipping')
 CREATE DATABASE [4-Shipping]
 GO
+
+IF  NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'5-Marketing')
+CREATE DATABASE [5-Marketing]
+GO
+
+IF  NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'5-Sales')
+CREATE DATABASE [5-Sales]
+GO
+
+IF  NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'5-Warehouse')
+CREATE DATABASE [5-Warehouse]
+GO
+
+IF  NOT EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'5-Shipping')
+CREATE DATABASE [5-Shipping]
+GO

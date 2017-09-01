@@ -63,3 +63,20 @@ GO
 IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'4-Shipping')
 DROP DATABASE [4-Shipping]
 GO
+
+
+IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'5-Marketing')
+DROP DATABASE [5-Marketing]
+GO
+
+IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'5-Sales')
+DROP DATABASE [5-Sales]
+GO
+
+IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'5-Warehouse')
+DROP DATABASE [5-Warehouse]
+GO
+
+IF EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE name = N'5-Shipping')
+DROP DATABASE [5-Shipping]
+GO
