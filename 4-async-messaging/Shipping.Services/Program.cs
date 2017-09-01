@@ -2,13 +2,13 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Marketing.Services
+namespace Shipping.Services
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var endpointName = "Marketing.Services";
+            var endpointName = "Shipping.Services";
             Console.Title = endpointName;
             MainAsync(endpointName).GetAwaiter().GetResult();
         }

@@ -1,13 +1,12 @@
-﻿using NServiceBus;
+﻿using Microsoft.Extensions.DependencyInjection;
+using NServiceBus;
 
-namespace Sales.API
+namespace WebApp.Services
 {
-    class ServiceBus
+    static class ServiceBus
     {
-        public static IEndpointInstance Instance { get; private set; }
-
-        public static void Start()
-        {
+        public static void AddNServiceBus(this IServiceCollection services)
+            {
             var config = new EndpointConfiguration("Sales.API");
             config.UseSerialization<NewtonsoftSerializer>();
             config.UseTransport<LearningTransport>();
@@ -17,7 +16,8 @@ namespace Sales.API
             messageConventions.DefiningEventsAs(t => t.Namespace != null && t.Namespace.EndsWith(".Messages.Events"));
             messageConventions.DefiningCommandsAs(t => t.Namespace != null && t.Namespace.EndsWith(".Messages.Commands"));
 
-            Instance = Endpoint.Start(config).GetAwaiter().GetResult();
+            var instance = Endpoint.Start(config).GetAwaiter().GetResult();
+            services.AddSingleton<IMessageSession>(instance);
         }
     }
 }
