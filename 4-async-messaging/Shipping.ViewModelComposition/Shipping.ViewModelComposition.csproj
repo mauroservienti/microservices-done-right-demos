@@ -1,13 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NServiceBus" Version="7.0.0-beta0001" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ITOps.ViewModelComposition.Json\ITOps.ViewModelComposition.Json.csproj" />
     <ProjectReference Include="..\ITOps.ViewModelComposition\ITOps.ViewModelComposition.csproj" />
     <ProjectReference Include="..\Sales.ViewModelComposition.Events\Sales.ViewModelComposition.Events.csproj" />
+    <ProjectReference Include="..\Shipping.Messages.Commands\Shipping.Messages.Commands.csproj" />
   </ItemGroup>
 
 </Project>

@@ -18,7 +18,7 @@ namespace Warehouse.Services
             var config = new EndpointConfiguration(endpointName);
             //endpointConfiguration.UsePersistence<LearningPersistence>();
             config.UseTransport<LearningTransport>();
-            config.UseSerialization<JsonSerializer>();
+            config.UseSerialization<NewtonsoftSerializer>();
             config.SendFailedMessagesTo("error");
 
             var messageConventions = config.Conventions();

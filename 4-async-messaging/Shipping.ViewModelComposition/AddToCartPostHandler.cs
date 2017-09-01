@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Newtonsoft.Json;
+using NServiceBus;
+using Shipping.Messages.Commands;
 using System;
 using System.Net.Http;
 using System.Text;
@@ -11,6 +13,13 @@ namespace Shipping.ViewModelComposition
 {
     class AddToCartPostHandler : IHandleRequests, IHandleRequestsErrors
     {
+        IMessageSession messageSession;
+
+        public AddToCartPostHandler(IMessageSession messageSession)
+        {
+            this.messageSession = messageSession;
+        }
+
         public bool Matches(RouteData routeData, string httpVerb, HttpRequest request)
         {
             var controller = (string)routeData.Values["controller"];
@@ -40,10 +49,13 @@ namespace Shipping.ViewModelComposition
             }
         }
 
-        public Task OnRequestError(Exception ex, dynamic vm, RouteData routeData, HttpRequest request)
+        public async Task OnRequestError(Exception ex, dynamic vm, RouteData routeData, HttpRequest request)
         {
-            //NOP
-            return Task.CompletedTask;
+            await messageSession.Send("Shipping.Services", new CleanupCart()
+            {
+                ProductId = int.Parse((string)routeData.Values["id"]),
+                CartId = 1 //this should come from a cookie or from a session or stored in the user account
+            });
         }
     }
 }

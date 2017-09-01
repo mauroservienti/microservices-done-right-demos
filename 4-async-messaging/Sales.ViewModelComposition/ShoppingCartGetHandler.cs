@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Routing;
 using Sales.ViewModelComposition.Events;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -33,7 +34,7 @@ namespace Marketing.ViewModelComposition
 
             dynamic shoppingCart = await response.Content.AsExpandoAsync().ConfigureAwait(false);
 
-            var cartItemsViewModel = MapToDictionary(shoppingCart.Items);
+            IDictionary<dynamic, dynamic> cartItemsViewModel = MapToDictionary(shoppingCart.Items);
 
             await vm.RaiseEvent(new ShoppingCartItemsLoaded()
             {
@@ -42,7 +43,7 @@ namespace Marketing.ViewModelComposition
             }).ConfigureAwait(false);
 
             vm.CartId = shoppingCart.Id;
-            vm.CartItems = cartItemsViewModel.Values;
+            vm.CartItems = cartItemsViewModel.Values.ToArray();
         }
 
         IDictionary<dynamic, dynamic> MapToDictionary(IEnumerable<object> cartItems)

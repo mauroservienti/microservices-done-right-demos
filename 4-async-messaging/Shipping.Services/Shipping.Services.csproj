@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1F367A4C-9A20-4185-AB32-190F4E8BC939}</ProjectGuid>
+    <ProjectGuid>{A91C8E06-BBDB-4CDF-BBB5-65F34F970091}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Marketing.Services</RootNamespace>
-    <AssemblyName>Marketing.Services</AssemblyName>
+    <RootNamespace>Shipping.Services</RootNamespace>
+    <AssemblyName>Shipping.Services</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,15 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NServiceBus.6.4.0\lib\net452\NServiceBus.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="NServiceBus.Newtonsoft.Json, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NServiceBus.Newtonsoft.Json.1.1.0\lib\net452\NServiceBus.Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -51,18 +42,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProductAddedToCartHandler.cs" />
+    <Compile Include="CleanupCartHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sales.Messages.Events\Sales.Messages.Events.csproj">
-      <Project>{4B297FEE-EDB2-4CDC-B784-BBB269822C6C}</Project>
-      <Name>Sales.Messages.Events</Name>
+    <PackageReference Include="NServiceBus">
+      <Version>6.4.0</Version>
+    </PackageReference>
+    <PackageReference Include="NServiceBus.Newtonsoft.Json">
+      <Version>1.1.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Shipping.Messages.Commands\Shipping.Messages.Commands.csproj">
+      <Project>{8A0DB1A7-DBFA-435B-99EF-E4044AA22C2D}</Project>
+      <Name>Shipping.Messages.Commands</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
