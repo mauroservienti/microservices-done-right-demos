@@ -21,7 +21,7 @@ In order to run the sample the following machine configuration is required:
 Set-ExecutionPolicy Unrestricted
 ```
 
-- Visual Studio 2015 Update 3 (Community Edition is supported), available for download at [https://www.visualstudio.com/downloads/](https://www.visualstudio.com/downloads/)
+- Visual Studio 2017 with .NET Core 2 support (Community Edition is supported), available for download at [https://www.visualstudio.com/downloads/](https://www.visualstudio.com/downloads/)
 
 - .Net framework 4.6.1 Targeting pack for Visual Studio, available for download at [https://www.microsoft.com/en-us/download/details.aspx?id=49978](https://www.microsoft.com/en-us/download/details.aspx?id=49978)
 
