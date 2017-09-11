@@ -2,7 +2,7 @@
 
 ## Scenario 1
 
-Composition gateway action as a reverse proxy.
+Composition gateway acting as a reverse proxy.
 
 Ensure the following projects are set as startup projects:
 
