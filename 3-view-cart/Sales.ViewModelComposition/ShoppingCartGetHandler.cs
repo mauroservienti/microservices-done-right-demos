@@ -33,7 +33,15 @@ namespace Marketing.ViewModelComposition
 
             dynamic shoppingCart = await response.Content.AsExpandoAsync().ConfigureAwait(false);
 
-            var cartItemsViewModel = MapToDictionary(shoppingCart.Items);
+            if (shoppingCart == null)
+            {
+                vm.CartId = id;
+                vm.CartItems = new List<dynamic>();
+
+                return;
+            }
+
+            IDictionary<dynamic, dynamic> cartItemsViewModel = MapToDictionary(shoppingCart.Items);
 
             await vm.RaiseEvent(new ShoppingCartItemsLoaded()
             {
