@@ -6,7 +6,7 @@ namespace WebApp.Services
     static class ServiceBus
     {
         public static void AddNServiceBus(this IServiceCollection services)
-            {
+        {
             var config = new EndpointConfiguration("Sales.API");
             config.UseSerialization<NewtonsoftSerializer>();
             config.UseTransport<LearningTransport>();
