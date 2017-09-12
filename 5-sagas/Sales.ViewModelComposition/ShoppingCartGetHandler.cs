@@ -51,7 +51,7 @@ namespace Marketing.ViewModelComposition
             }).ConfigureAwait(false);
 
             vm.CartId = shoppingCart.Id;
-            vm.CartItems = cartItemsViewModel.Values.ToArray();
+            vm.CartItems = cartItemsViewModel.Values.ToList();
         }
 
         IDictionary<dynamic, dynamic> MapToDictionary(IEnumerable<object> cartItems)
