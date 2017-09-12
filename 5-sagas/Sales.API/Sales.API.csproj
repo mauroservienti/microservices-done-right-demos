@@ -108,6 +108,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\ProductsPricesController.cs" />
+    <Compile Include="Handlers\InactiveCartWipedHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceBus.cs" />

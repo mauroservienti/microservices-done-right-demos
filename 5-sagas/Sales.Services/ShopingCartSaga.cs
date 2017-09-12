@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Sales.Services
 {
     class ShopingCartSaga : Saga<ShopingCartSaga.ShopingCartSagaData>,
-        IHandleMessages<ProductAddedToCart>,
+        IAmStartedByMessages<ProductAddedToCart>,
         IHandleTimeouts<CartGettingStaleTimeout>,
         IHandleTimeouts<CartWipeTimeout>
     {
@@ -25,38 +25,32 @@ namespace Sales.Services
         {
             Data.LastTouched = DateTime.Now;
 
-            await RequestTimeout(context, Data.LastTouched.AddDays(7), new CartGettingStaleTimeout()
+            await RequestTimeout(context, Data.LastTouched.AddSeconds(30), new CartGettingStaleTimeout()
             {
                 LastTouched = Data.LastTouched
             });
 
-            await RequestTimeout(context, Data.LastTouched.AddMonths(1), new CartWipeTimeout()
+            await RequestTimeout(context, Data.LastTouched.AddSeconds(60), new CartWipeTimeout()
             {
-                LastTouched= Data.LastTouched
+                LastTouched = Data.LastTouched
             });
         }
 
-        public Task Timeout(CartGettingStaleTimeout state, IMessageHandlerContext context)
+        public async Task Timeout(CartGettingStaleTimeout state, IMessageHandlerContext context)
         {
             if (Data.LastTouched <= state.LastTouched)
             {
-                //send e-mail
-                //publish event CartGotStaleDueToInactivity
+                await context.Publish<CartGotStale>(e => e.CartId = Data.CartId);
             }
-
-            return Task.CompletedTask;
         }
 
-        public Task Timeout(CartWipeTimeout state, IMessageHandlerContext context)
+        public async Task Timeout(CartWipeTimeout state, IMessageHandlerContext context)
         {
             if (Data.LastTouched <= state.LastTouched)
             {
-                //publish event CartWipedDueToInactivity
-                //delete cart content
-                //MarkAsComplete();
+                await context.Publish<InactiveCartWiped>(e => e.CartId = Data.CartId);
+                MarkAsComplete();
             }
-
-            return Task.CompletedTask;
         }
     }
 

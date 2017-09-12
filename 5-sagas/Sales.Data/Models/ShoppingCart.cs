@@ -8,7 +8,7 @@ namespace Sales.Data.Models
         {
             this.Items = new List<ShoppingCartItem>();
         }
-
+        
         public int Id { get; set; }
 
         public ICollection<ShoppingCartItem> Items { get; set; }

@@ -1,5 +1,6 @@
 ﻿using Sales.Data.Migrations;
 using Sales.Data.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 
 namespace Sales.Data.Context
@@ -18,10 +19,19 @@ namespace Sales.Data.Context
             Database.SetInitializer(new DatabaseInitializer());
 
             modelBuilder.Entity<ProductPrice>();
-            modelBuilder.Entity<ShoppingCart>()
+
+            var cartEntity = modelBuilder.Entity<ShoppingCart>();
+
+            cartEntity
+                .HasKey(c => c.Id)
                 .HasMany(c => c.Items)
                 .WithRequired()
-                .HasForeignKey(k => k.CartId);
+                .HasForeignKey(k => k.CartId)
+                .WillCascadeOnDelete();
+
+            cartEntity
+                .Property(c => c.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             base.OnModelCreating(modelBuilder);
         }

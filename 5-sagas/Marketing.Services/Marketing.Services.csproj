@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InactiveCartWipedHandler.cs" />
+    <Compile Include="CartGotStaleHandler.cs" />
     <Compile Include="ProductAddedToCartHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
