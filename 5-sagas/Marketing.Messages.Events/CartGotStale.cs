@@ -1,4 +1,4 @@
-﻿namespace Sales.Messages.Events
+﻿namespace Marketing.Messages.Events
 {
     public interface CartGotStale
     {

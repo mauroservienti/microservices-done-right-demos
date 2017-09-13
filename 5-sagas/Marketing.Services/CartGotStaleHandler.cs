@@ -1,5 +1,5 @@
-﻿using NServiceBus;
-using Sales.Messages.Events;
+﻿using Marketing.Messages.Events;
+using NServiceBus;
 using System;
 using System.Threading.Tasks;
 

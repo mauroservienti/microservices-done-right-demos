@@ -1,6 +1,6 @@
-﻿using NServiceBus;
+﻿using Marketing.Messages.Events;
+using NServiceBus;
 using Sales.Data.Context;
-using Sales.Messages.Events;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

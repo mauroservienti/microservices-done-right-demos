@@ -1,5 +1,5 @@
-﻿using NServiceBus;
-using Sales.Messages.Events;
+﻿using Marketing.Messages.Events;
+using NServiceBus;
 using Shipping.Data.Context;
 using System;
 using System.Linq;

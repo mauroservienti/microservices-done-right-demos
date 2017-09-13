@@ -56,12 +56,17 @@
     <Compile Include="ProductAddedToCartHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShopingCartSaga.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Marketing.Messages.Events\Marketing.Messages.Events.csproj">
+      <Project>{195DB39E-B564-4196-8C69-29D4BCEF3093}</Project>
+      <Name>Marketing.Messages.Events</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sales.Messages.Events\Sales.Messages.Events.csproj">
       <Project>{4B297FEE-EDB2-4CDC-B784-BBB269822C6C}</Project>
       <Name>Sales.Messages.Events</Name>

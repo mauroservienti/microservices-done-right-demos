@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4B297FEE-EDB2-4CDC-B784-BBB269822C6C}</ProjectGuid>
+    <ProjectGuid>{195DB39E-B564-4196-8C69-29D4BCEF3093}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sales.Messages.Events</RootNamespace>
-    <AssemblyName>Sales.Messages.Events</AssemblyName>
+    <RootNamespace>Marketing.Messages.Events</RootNamespace>
+    <AssemblyName>Marketing.Messages.Events</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,7 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProductAddedToCart.cs" />
+    <Compile Include="CartGotStale.cs" />
+    <Compile Include="InactiveCartWiped.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
