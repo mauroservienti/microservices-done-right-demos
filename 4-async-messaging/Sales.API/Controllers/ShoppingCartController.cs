@@ -18,6 +18,7 @@ namespace Sales.API.Controllers
         {
             var cartId = (int)data.CartId;
             var productId = (int)data.ProductId;
+            var quantity = (int)data.Quantity;
 
             using (var db = new SalesContext())
             {
@@ -50,11 +51,11 @@ namespace Sales.API.Controllers
                     cart.Items.Add(cartItem);
                 }
 
-                cartItem.Quantity++;
+                cartItem.Quantity += quantity;
 
                 await db.SaveChangesAsync();
 
-                await ServiceBus.Instance.Publish<ProductAddedToCart>(e => 
+                await ServiceBus.Instance.Publish<ProductAddedToCart>(e =>
                 {
                     e.CartId = cartId;
                     e.ProductId = productId;
