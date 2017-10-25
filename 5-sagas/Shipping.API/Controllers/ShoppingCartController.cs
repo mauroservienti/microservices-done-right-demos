@@ -17,6 +17,7 @@ namespace Shipping.API.Controllers
         {
             var cartId = (int)data.CartId;
             var productId = (int)data.ProductId;
+            var quantity = (int)data.Quantity;
 
             using (var db = new ShippingContext())
             {
@@ -39,14 +40,14 @@ namespace Shipping.API.Controllers
                     db.ShoppingCartItems.Add(cartItem);
                 }
 
-                cartItem.Quantity++;
+                cartItem.Quantity += quantity;
                 if (!cartItem.FreeShippingEligible && cartItem.Quantity > 1)
                 {
                     var cost = cartItem.ShippingCost;
                     var qty = cartItem.Quantity;
                     cartItem.ShippingCost += (cost * qty) / 100;
                 }
-                
+
                 await db.SaveChangesAsync();
             }
             return StatusCode(HttpStatusCode.OK);

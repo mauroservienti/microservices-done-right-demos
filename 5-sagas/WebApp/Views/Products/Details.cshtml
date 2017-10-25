@@ -5,6 +5,12 @@
     <form action="/products/addtocart/@Model.ProductId" method="post">
         <h1>@Model.ProductName</h1>
         <h2>@Model.ProductDescription</h2>
+        <select name="quantity" id="quantity">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
         <input type="submit" value="Add to cart">
         <hr />
         <h3>Price: @Model.ProductPrice $</h3>

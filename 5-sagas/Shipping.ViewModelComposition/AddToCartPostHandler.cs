@@ -36,6 +36,7 @@ namespace Shipping.ViewModelComposition
             var postData = new
             {
                 ProductId = (string)routeData.Values["id"],
+                Quantity = int.Parse(request.Form["quantity"][0]), //should check is > 0
                 CartId = 1 //this should come from a cookie or from a session or stored in the user account
             };
 
