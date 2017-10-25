@@ -1,0 +1,82 @@
+{
+	"variables": [],
+	"info": {
+		"name": "SOA Done Right",
+		"_postman_id": "7f6fbef6-3dac-3b1b-336e-483602962cb0",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Product #1 (Marketing Only)",
+			"request": {
+				"url": "http://localhost:20295/api/product-details/product/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Product #1",
+			"request": {
+				"url": "http://localhost:4457/products/details/1",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Products List (Marketing Only)",
+			"request": {
+				"url": {
+					"raw": "http://localhost:20295/api/product-details/products?pageIndex=0&pageSize=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "20295",
+					"path": [
+						"api",
+						"product-details",
+						"products"
+					],
+					"query": [
+						{
+							"key": "pageIndex",
+							"value": "0",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "pageSize",
+							"value": "10",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Products Prices (Sales Only)",
+			"request": {
+				"url": "http://localhost:20296/api/prices/products/1,2",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
