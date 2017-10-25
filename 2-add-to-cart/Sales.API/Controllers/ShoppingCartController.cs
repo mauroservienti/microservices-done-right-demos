@@ -15,6 +15,7 @@ namespace Sales.API.Controllers
         {
             var cartId = (int)data.CartId;
             var productId = (int)data.ProductId;
+            var quantity = (int)data.Quantity;
 
             using (var db = new SalesContext())
             {
