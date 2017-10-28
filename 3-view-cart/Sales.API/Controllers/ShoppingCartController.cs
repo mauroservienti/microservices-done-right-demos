@@ -37,19 +37,14 @@ namespace Sales.API.Controllers
                     .Where(o => o.ProductId == productId)
                     .Single();
 
-                var cartItem = cart.Items.SingleOrDefault(item => item.ProductId == productId);
-                if (cartItem == null)
+                cart.Items.Add(new ShoppingCartItem()
                 {
-                    cartItem = new ShoppingCartItem()
-                    {
-                        CartId = cartId,
-                        ProductId = productId,
-                        ProductPrice = product.Price
-                    };
-                    cart.Items.Add(cartItem);
-                }
-
-                cartItem.Quantity += quantity;
+                    CartId = cartId,
+                    RequestId = Request.Headers.GetValues("request-id").Single(),
+                    ProductId = productId,
+                    ProductPrice = product.Price,
+                    Quantity = quantity
+                });
 
                 await db.SaveChangesAsync();
             }
@@ -63,12 +58,25 @@ namespace Sales.API.Controllers
         {
             using (var db = new SalesContext())
             {
-                var cart = db.ShoppingCarts
+                var cartItems = db.ShoppingCarts
                     .Include(c => c.Items)
                     .Where(o => o.Id == id)
-                    .SingleOrDefault();
+                    .SelectMany(cart => cart.Items)
+                    .ToArray()
+                    .GroupBy(cartItem => cartItem.ProductId)
+                    .Select(group => new
+                    {
+                        ProductId = group.Key,
+                        Quantity = group.Sum(cartItem => cartItem.Quantity),
+                        ProductPrice = group.FirstOrDefault()?.ProductPrice
+                    })
+                    .ToArray();
 
-                return cart;
+                return new
+                {
+                    CartId = id,
+                    Items = cartItems
+                };
             }
         }
     }

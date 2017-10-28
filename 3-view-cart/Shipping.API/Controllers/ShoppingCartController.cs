@@ -25,29 +25,17 @@ namespace Shipping.API.Controllers
                     .Where(o => o.ProductId == productId)
                     .Single();
 
-                var cartItem = db.ShoppingCartItems
-                    .Where(o => o.ProductId == productId)
-                    .SingleOrDefault();
-                if (cartItem == null)
+                var cartItem = new ShoppingCartItem()
                 {
-                    cartItem = new ShoppingCartItem()
-                    {
-                        CartId = cartId,
-                        ProductId = productId,
-                        ShippingCost = shippingDetails.Cost,
-                        FreeShippingEligible = shippingDetails.FreeShippingEligible
-                    };
-                    db.ShoppingCartItems.Add(cartItem);
-                }
+                    CartId = cartId,
+                    RequestId = Request.Headers.GetValues("request-id").Single(),
+                    ProductId = productId,
+                    Quantity = quantity,
+                    ItemShippingCost = shippingDetails.Cost,
+                    FreeShippingEligible = shippingDetails.FreeShippingEligible
+                };
 
-                cartItem.Quantity += quantity;
-                if (!cartItem.FreeShippingEligible && cartItem.Quantity > 1)
-                {
-                    var cost = cartItem.ShippingCost;
-                    var qty = cartItem.Quantity;
-                    cartItem.ShippingCost += (cost * qty) / 100;
-                }
-
+                db.ShoppingCartItems.Add(cartItem);
                 await db.SaveChangesAsync();
             }
             return StatusCode(HttpStatusCode.OK);
@@ -60,11 +48,36 @@ namespace Shipping.API.Controllers
             using (var db = new ShippingContext())
             {
                 var productIds = ids.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s)).ToArray();
-                var items = db.ShoppingCartItems
+
+                var cartItems = db.ShoppingCartItems
                     .Where(item => productIds.Any(id => id == item.ProductId))
+                    .ToArray()
+                    .GroupBy(cartItem => cartItem.ProductId)
+                    .Select(group =>
+                    {
+                        var cartId = group.First().CartId;
+                        var freeShippingEligible = group.First().FreeShippingEligible;
+                        var quantity = group.Sum(cartItem => cartItem.Quantity);
+                        var itemShippingCost = group.First().ItemShippingCost;
+
+                        var shippingCost = itemShippingCost;
+                        if (quantity > 1)
+                        {
+                            shippingCost = itemShippingCost + (((itemShippingCost * 10) / 100) * quantity);
+                        }
+
+                        return new
+                        {
+                            ProductId = group.Key,
+                            CartId = cartId,
+                            FreeShippingEligible = freeShippingEligible,
+                            Quantity = quantity,
+                            ShippingCost = shippingCost
+                        };
+                    })
                     .ToArray();
 
-                return items;
+                return cartItems;
             }
         }
     }

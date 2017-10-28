@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Routing;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,14 +13,18 @@ namespace ITOps.ViewModelComposition.Mvc
     {
         IEnumerable<IHandleResult> resultHandlers;
 
-        public CompositionActionFilter( IEnumerable<IHandleResult> resultHandlers )
+        public CompositionActionFilter(IEnumerable<IHandleResult> resultHandlers)
         {
             this.resultHandlers = resultHandlers;
         }
 
         public async Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
         {
-            (var viewModel, var statusCode) = await CompositionHandler.HandleRequest(context.HttpContext);
+            var requestId = context.HttpContext.Request.Headers.ContainsKey("request-id")
+                ? context.HttpContext.Request.Headers["request-id"].Single()
+                : Guid.NewGuid().ToString();
+
+            (var viewModel, var statusCode) = await CompositionHandler.HandleRequest(requestId, context.HttpContext);
 
             var routeData = context.HttpContext.GetRouteData();
             var request = context.HttpContext.Request;
@@ -32,12 +37,14 @@ namespace ITOps.ViewModelComposition.Mvc
 
             if (handler != null)
             {
-                await handler.Handle(context, viewModel, statusCode);
+                await handler.Handle(requestId, context, viewModel, statusCode);
             }
             else
             {
                 defaultHandler();
             }
+
+            context.HttpContext.Response.Headers.Add("request-id", requestId);
 
             await next();
 

@@ -24,7 +24,7 @@ namespace Marketing.ViewModelComposition
                    && !routeData.Values.ContainsKey("id");
         }
 
-        public async Task Handle(dynamic vm, RouteData routeData, HttpRequest request)
+        public async Task Handle(string requestId, dynamic vm, RouteData routeData, HttpRequest request)
         {
             var id = 1;
 
@@ -34,7 +34,7 @@ namespace Marketing.ViewModelComposition
 
             dynamic shoppingCart = await response.Content.AsExpandoAsync().ConfigureAwait(false);
 
-            if (shoppingCart == null)
+            if (shoppingCart.Items.Count == 0)
             {
                 vm.CartId = id;
                 vm.CartItems = new List<dynamic>();
@@ -46,11 +46,11 @@ namespace Marketing.ViewModelComposition
 
             await vm.RaiseEvent(new ShoppingCartItemsLoaded()
             {
-                CartId = shoppingCart.Id,
+                CartId = shoppingCart.CartId,
                 CartItemsViewModel = cartItemsViewModel
             }).ConfigureAwait(false);
 
-            vm.CartId = shoppingCart.Id;
+            vm.CartId = shoppingCart.CartId;
             vm.CartItems = cartItemsViewModel.Values.ToList();
         }
 

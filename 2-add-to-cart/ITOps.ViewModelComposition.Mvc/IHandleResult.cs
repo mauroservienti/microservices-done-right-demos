@@ -5,6 +5,6 @@ namespace ITOps.ViewModelComposition.Mvc
 {
     public interface IHandleResult : IInterceptRoutes
     {
-        Task Handle(ResultExecutingContext context, dynamic viewModel, int httpStatusCode);
+        Task Handle(string requestId, ResultExecutingContext context, dynamic viewModel, int httpStatusCode);
     }
 }
