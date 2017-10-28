@@ -54,3 +54,4 @@ NOTE:
 
 * Do not use the learning transport or learning persistence to perform any kind of performance analysis.
 * All solutions are configured to use the [SwitchStartupProject](https://marketplace.visualstudio.com/items?itemName=vs-publisher-141975.SwitchStartupProject) Visual Studio Extension to manage startup projects. The extension is not a requirement, it's handy.
+* A [LINQPad script](SetStartupProjects.linq) is available to automatically configure startup projects for all solutions in the demo
