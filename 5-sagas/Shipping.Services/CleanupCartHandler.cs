@@ -1,15 +1,24 @@
 ﻿using NServiceBus;
+using Shipping.Data.Context;
 using Shipping.Messages.Commands;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Shipping.Services
 {
     class CleanupCartHandler : IHandleMessages<CleanupCart>
     {
-        public Task Handle(CleanupCart message, IMessageHandlerContext context)
+        public async Task Handle(CleanupCart message, IMessageHandlerContext context)
         {
-            //do whatever is required to clean up the cart
-            return Task.CompletedTask;
+            using (var db = new ShippingContext())
+            {
+                var shoppingCartItem = db.ShoppingCartItems.SingleOrDefault(item => item.RequestId == message.RequestId);
+                if (shoppingCartItem != null)
+                {
+                    db.ShoppingCartItems.Remove(shoppingCartItem);
+                    await db.SaveChangesAsync();
+                }
+            }
         }
     }
 }

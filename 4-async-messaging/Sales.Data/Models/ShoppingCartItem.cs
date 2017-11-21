@@ -11,5 +11,6 @@
         public int Quantity { get; set; }
 
         public decimal ProductPrice { get; set; }
+        public string RequestId { get; set; }
     }
 }

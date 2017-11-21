@@ -7,6 +7,6 @@ namespace ITOps.ViewModelComposition
 {
     public interface IHandleRequestsErrors
     {
-        Task OnRequestError(Exception ex, dynamic vm, RouteData routeData, HttpRequest request);
+        Task OnRequestError(string requestId, Exception ex, dynamic vm, RouteData routeData, HttpRequest request);
     }
 }

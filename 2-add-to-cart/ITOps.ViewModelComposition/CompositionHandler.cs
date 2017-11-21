@@ -11,7 +11,7 @@ namespace ITOps.ViewModelComposition.Gateway
 {
     public class CompositionHandler
     {
-        public static async Task<(dynamic ViewModel, int StatusCode)> HandleRequest(HttpContext context)
+        public static async Task<(dynamic ViewModel, int StatusCode)> HandleRequest(string requestId, HttpContext context)
         {
             var pending = new List<Task>();
             var routeData = context.GetRouteData();
@@ -28,7 +28,7 @@ namespace ITOps.ViewModelComposition.Gateway
             {
                 pending.Add
                 (
-                    handler.Handle(vm, routeData, request)
+                    handler.Handle(requestId, vm, routeData, request)
                 );
             }
 
@@ -49,7 +49,7 @@ namespace ITOps.ViewModelComposition.Gateway
                     {
                         foreach (var handler in errorHandlers)
                         {
-                            await handler.OnRequestError(ex, vm, routeData, request);
+                            await handler.OnRequestError(requestId, ex, vm, routeData, request);
                         }
                     }
 

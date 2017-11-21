@@ -6,6 +6,6 @@ namespace ITOps.ViewModelComposition
 {
     abstract class Subscription
     {
-        public abstract Task Invoke(dynamic viewModel, object @event, RouteData routeData, HttpRequest request);
+        public abstract Task Invoke(string requestId, dynamic viewModel, object @event, RouteData routeData, HttpRequest request);
     }
 }

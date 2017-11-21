@@ -10,12 +10,12 @@ namespace ITOps.ViewModelComposition
 {
     public class CompositionHandler
     {
-        public static async Task<(dynamic ViewModel, int StatusCode)> HandleRequest(HttpContext context)
+        public static async Task<(dynamic ViewModel, int StatusCode)> HandleRequest(string requestId, HttpContext context)
         {
             var pending = new List<Task>();
             var routeData = context.GetRouteData();
             var request = context.Request;
-            var vm = new DynamicViewModel(routeData, request);
+            var vm = new DynamicViewModel(requestId, routeData, request);
             var interceptors = context.RequestServices.GetServices<IInterceptRoutes>();
 
             try
@@ -34,7 +34,7 @@ namespace ITOps.ViewModelComposition
                 {
                     pending.Add
                     (
-                        handler.Handle(vm, routeData, request)
+                        handler.Handle(requestId, vm, routeData, request)
                     );
                 }
 
@@ -55,7 +55,7 @@ namespace ITOps.ViewModelComposition
                         {
                             foreach (var handler in errorHandlers)
                             {
-                                await handler.OnRequestError(ex, vm, routeData, request);
+                                await handler.OnRequestError(requestId, ex, vm, routeData, request);
                             }
                         }
 

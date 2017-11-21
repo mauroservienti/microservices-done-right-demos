@@ -6,6 +6,6 @@ namespace ITOps.ViewModelComposition
 {
     public interface IHandleRequests : IInterceptRoutes
     {
-        Task Handle(dynamic vm, RouteData routeData, HttpRequest request);
+        Task Handle(string requestId, dynamic vm, RouteData routeData, HttpRequest request);
     }
 }

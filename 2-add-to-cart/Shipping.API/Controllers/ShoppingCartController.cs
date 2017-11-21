@@ -25,9 +25,11 @@ namespace Shipping.API.Controllers
 
                 var cartItem = new ShoppingCartItem()
                 {
-                    CartId= cartId,
+                    CartId = cartId,
+                    RequestId = Request.Headers.GetValues("request-id").Single(),
                     ProductId = productId,
-                    ShippingCost = shippingDetails.Cost,
+                    Quantity = quantity,
+                    ItemShippingCost = shippingDetails.Cost,
                     FreeShippingEligible = shippingDetails.FreeShippingEligible
                 };
 

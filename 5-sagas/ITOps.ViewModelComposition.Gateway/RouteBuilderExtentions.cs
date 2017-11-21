@@ -5,7 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ITOps.ViewModelComposition.Gateway
@@ -119,7 +121,14 @@ namespace ITOps.ViewModelComposition.Gateway
 
         static async Task HandleRequest(HttpContext context)
         {
-            var result = await CompositionHandler.HandleRequest(context);
+            var requestId = context.Request.Headers.ContainsKey("request-id")
+                ? context.Request.Headers["request-id"].Single()
+                : Guid.NewGuid().ToString();
+
+            var result = await CompositionHandler.HandleRequest(requestId, context);
+
+            context.Response.Headers.Add("request-id", requestId);
+
             if (result.StatusCode == StatusCodes.Status200OK)
             {
                 string json = JsonConvert.SerializeObject(result.ViewModel, GetSettings(context));

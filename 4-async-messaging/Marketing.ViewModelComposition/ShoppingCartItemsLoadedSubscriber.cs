@@ -23,7 +23,7 @@ namespace Marketing.ViewModelComposition
 
         public void Subscribe(ISubscriptionStorage subscriptionStorage, RouteData routeData, HttpRequest request)
         {
-            subscriptionStorage.Subscribe<ShoppingCartItemsLoaded>(async (pageViewModel, @event, rd, req) =>
+            subscriptionStorage.Subscribe<ShoppingCartItemsLoaded>(async (requestId, pageViewModel, @event, rd, req) =>
             {
                 var ids = String.Join(",", @event.CartItemsViewModel.Keys);
 

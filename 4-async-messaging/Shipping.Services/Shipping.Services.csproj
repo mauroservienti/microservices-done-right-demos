@@ -50,6 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="EntityFramework">
+      <Version>6.1.3</Version>
+    </PackageReference>
     <PackageReference Include="NServiceBus">
       <Version>6.4.0</Version>
     </PackageReference>
@@ -58,6 +61,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Shipping.Data\Shipping.Data.csproj">
+      <Project>{5b3f8e09-72ce-4101-afab-f0f721a4ef89}</Project>
+      <Name>Shipping.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shipping.Messages.Commands\Shipping.Messages.Commands.csproj">
       <Project>{8A0DB1A7-DBFA-435B-99EF-E4044AA22C2D}</Project>
       <Name>Shipping.Messages.Commands</Name>

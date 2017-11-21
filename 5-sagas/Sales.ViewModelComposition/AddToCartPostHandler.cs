@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Newtonsoft.Json;
+using NServiceBus;
+using Sales.Messages.Commands;
 using System;
 using System.Net.Http;
 using System.Text;
@@ -11,6 +13,13 @@ namespace Shipping.ViewModelComposition
 {
     class AddToCartPostHandler : IHandleRequests, IHandleRequestsErrors
     {
+        IMessageSession messageSession;
+
+        public AddToCartPostHandler(IMessageSession messageSession)
+        {
+            this.messageSession = messageSession;
+        }
+
         public bool Matches(RouteData routeData, string httpVerb, HttpRequest request)
         {
             var controller = (string)routeData.Values["controller"];
@@ -22,7 +31,7 @@ namespace Shipping.ViewModelComposition
                    && routeData.Values.ContainsKey("id");
         }
 
-        public async Task Handle(dynamic vm, RouteData routeData, HttpRequest request)
+        public async Task Handle(string requestId, dynamic vm, RouteData routeData, HttpRequest request)
         {
             var postData = new
             {
@@ -33,7 +42,14 @@ namespace Shipping.ViewModelComposition
 
             var url = $"http://localhost:20296/api/shopping-cart";
             var client = new HttpClient();
-            var response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(postData), Encoding.UTF8, "application/json")).ConfigureAwait(false);
+
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, url)
+            {
+                Content = new StringContent(JsonConvert.SerializeObject(postData), Encoding.UTF8, "application/json")
+            };
+            requestMessage.Headers.Add("request-id", requestId);
+
+            var response = await client.SendAsync(requestMessage);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -41,10 +57,14 @@ namespace Shipping.ViewModelComposition
             }
         }
 
-        public Task OnRequestError(Exception ex, dynamic vm, RouteData routeData, HttpRequest request)
+        public Task OnRequestError(string requestId, Exception ex, dynamic vm, RouteData routeData, HttpRequest request)
         {
-            //NOP
-            return Task.CompletedTask;
+            return messageSession.Send("Sales.Services", new CleanupCart()
+            {
+                ProductId = int.Parse((string)routeData.Values["id"]),
+                CartId = 1, //this should come from a cookie or from a session or stored in the user account
+                RequestId = requestId
+            });
         }
     }
 }

@@ -7,6 +7,6 @@ namespace ITOps.ViewModelComposition
 {
     public interface ISubscriptionStorage
     {
-        void Subscribe<T>(Func<dynamic, T, RouteData, HttpRequest, Task> subscription);
+        void Subscribe<T>(Func<string, dynamic, T, RouteData, HttpRequest, Task> subscription);
     }
 }

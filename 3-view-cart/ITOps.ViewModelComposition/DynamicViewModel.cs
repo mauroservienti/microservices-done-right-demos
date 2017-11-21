@@ -9,20 +9,22 @@ namespace ITOps.ViewModelComposition
 {
     class DynamicViewModel : DynamicObject, ISubscriptionStorage
     {
+        string requestId;
         RouteData routeData;
         HttpRequest request;
         IDictionary<Type, IList<Subscription>> subscriptions = new Dictionary<Type, IList<Subscription>>();
         IDictionary<string, object> properties = new Dictionary<string, object>();
 
-        public DynamicViewModel(RouteData routeData, HttpRequest request)
+        public DynamicViewModel(string requestId, RouteData routeData, HttpRequest request)
         {
+            this.requestId = requestId;
             this.routeData = routeData;
             this.request = request;
         }
 
         public void CleanupSubscribers() => subscriptions.Clear();
 
-        public void Subscribe<T>(Func<dynamic, T, RouteData, HttpRequest, Task> subscription)
+        public void Subscribe<T>(Func<string, dynamic, T, RouteData, HttpRequest, Task> subscription)
         {
             if (!subscriptions.TryGetValue(typeof(T), out IList<Subscription> subscribers))
             {
@@ -71,7 +73,7 @@ namespace ITOps.ViewModelComposition
                 var tasks = new List<Task>();
                 foreach (var subscriber in subscribers)
                 {
-                    tasks.Add(subscriber.Invoke(this, @event, routeData, request));
+                    tasks.Add(subscriber.Invoke(requestId, this, @event, routeData, request));
                 }
 
                 return Task.WhenAll(tasks);

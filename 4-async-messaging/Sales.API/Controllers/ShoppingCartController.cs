@@ -19,6 +19,7 @@ namespace Sales.API.Controllers
             var cartId = (int)data.CartId;
             var productId = (int)data.ProductId;
             var quantity = (int)data.Quantity;
+            var requestId = Request.Headers.GetValues("request-id").Single();
 
             using (var db = new SalesContext())
             {
@@ -35,31 +36,30 @@ namespace Sales.API.Controllers
                     db.ShoppingCarts.Add(cart);
                 }
 
-                var product = db.ProductsPrices
-                    .Where(o => o.ProductId == productId)
-                    .Single();
-
-                var cartItem = cart.Items.SingleOrDefault(item => item.ProductId == productId);
-                if (cartItem == null)
+                var alreadyAdded = cart.Items.Any(item => item.RequestId == requestId);
+                if (!alreadyAdded)
                 {
-                    cartItem = new ShoppingCartItem()
+                    var product = db.ProductsPrices
+                        .Where(o => o.ProductId == productId)
+                        .Single();
+
+                    cart.Items.Add(new ShoppingCartItem()
                     {
                         CartId = cartId,
+                        RequestId = requestId,
                         ProductId = productId,
-                        ProductPrice = product.Price
-                    };
-                    cart.Items.Add(cartItem);
+                        ProductPrice = product.Price,
+                        Quantity = quantity
+                    });
+
+                    await ServiceBus.Instance.Publish<ProductAddedToCart>(e =>
+                    {
+                        e.CartId = cartId;
+                        e.ProductId = productId;
+                    });
                 }
 
-                cartItem.Quantity += quantity;
-
                 await db.SaveChangesAsync();
-
-                await ServiceBus.Instance.Publish<ProductAddedToCart>(e =>
-                {
-                    e.CartId = cartId;
-                    e.ProductId = productId;
-                });
             }
 
             return StatusCode(HttpStatusCode.OK);
@@ -71,12 +71,25 @@ namespace Sales.API.Controllers
         {
             using (var db = new SalesContext())
             {
-                var cart = db.ShoppingCarts
+                var cartItems = db.ShoppingCarts
                     .Include(c => c.Items)
                     .Where(o => o.Id == id)
-                    .SingleOrDefault();
+                    .SelectMany(cart => cart.Items)
+                    .ToArray()
+                    .GroupBy(cartItem => cartItem.ProductId)
+                    .Select(group => new
+                    {
+                        ProductId = group.Key,
+                        Quantity = group.Sum(cartItem => cartItem.Quantity),
+                        ProductPrice = group.FirstOrDefault()?.ProductPrice
+                    })
+                    .ToArray();
 
-                return cart;
+                return new
+                {
+                    CartId = id,
+                    Items = cartItems
+                };
             }
         }
     }

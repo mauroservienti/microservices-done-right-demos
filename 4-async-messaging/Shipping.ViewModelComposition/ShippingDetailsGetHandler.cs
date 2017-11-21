@@ -20,7 +20,7 @@ namespace Shipping.ViewModelComposition
                    && routeData.Values.ContainsKey("id");
         }
 
-        public async Task Handle(dynamic vm, RouteData routeData, HttpRequest request)
+        public async Task Handle(string requestId, dynamic vm, RouteData routeData, HttpRequest request)
         {
             var id = (string)routeData.Values["id"];
 

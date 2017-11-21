@@ -35,12 +35,13 @@ namespace Sales.API.Controllers
                     .Where(o => o.ProductId == productId)
                     .Single();
 
-                //not taking into account quantity, assuming always 1.
                 cart.Items.Add(new ShoppingCartItem()
                 {
                     CartId = cartId,
+                    RequestId = Request.Headers.GetValues("request-id").Single(),
                     ProductId = productId,
-                    ProductPrice = product.Price
+                    ProductPrice = product.Price,
+                    Quantity = quantity
                 });
 
                 await db.SaveChangesAsync();

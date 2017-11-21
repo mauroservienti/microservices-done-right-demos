@@ -8,7 +8,9 @@
 
         public int ProductId { get; set; }
 
-        public decimal ShippingCost { get; set; }
+        public decimal ItemShippingCost { get; set; }
         public bool FreeShippingEligible { get; set; }
+        public string RequestId { get; set; }
+        public int Quantity { get; set; }
     }
 }
