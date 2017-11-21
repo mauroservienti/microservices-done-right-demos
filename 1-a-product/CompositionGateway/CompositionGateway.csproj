@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Routing" Version="1.1.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ITOps.ViewModelComposition.Gateway\ITOps.ViewModelComposition.Gateway.csproj" />
+    <ProjectReference Include="..\..\it-ops-shared\ITOps.ViewModelComposition.Gateway\ITOps.ViewModelComposition.Gateway.csproj" />
     <ProjectReference Include="..\Marketing.ViewModelComposition\Marketing.ViewModelComposition.csproj" />
     <ProjectReference Include="..\Sales.ViewModelComposition\Sales.ViewModelComposition.csproj" />
     <ProjectReference Include="..\Warehouse.ViewModelComposition\Warehouse.ViewModelComposition.csproj" />

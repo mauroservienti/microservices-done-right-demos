@@ -16,13 +16,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Data", "Warehouse
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.API", "Warehouse.API\Warehouse.API.csproj", "{17E8D12B-9975-4F06-BCA5-3F8E25ADE22A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITOps.ViewModelComposition", "ITOps.ViewModelComposition\ITOps.ViewModelComposition.csproj", "{C1796DD0-C5DB-4FC9-A0A2-6EFE8D825369}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITOps.ViewModelComposition", "..\it-ops-shared\ITOps.ViewModelComposition\ITOps.ViewModelComposition.csproj", "{C1796DD0-C5DB-4FC9-A0A2-6EFE8D825369}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITOps.ViewModelComposition.Json", "ITOps.ViewModelComposition.Json\ITOps.ViewModelComposition.Json.csproj", "{C0305AD8-052C-493A-9036-44511B901A52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITOps.ViewModelComposition.Json", "..\it-ops-shared\ITOps.ViewModelComposition.Json\ITOps.ViewModelComposition.Json.csproj", "{C0305AD8-052C-493A-9036-44511B901A52}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITOps.ViewModelComposition.Gateway", "ITOps.ViewModelComposition.Gateway\ITOps.ViewModelComposition.Gateway.csproj", "{FF983839-A4C5-46E9-9511-6A2A9FA326F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITOps.ViewModelComposition.Gateway", "..\it-ops-shared\ITOps.ViewModelComposition.Gateway\ITOps.ViewModelComposition.Gateway.csproj", "{FF983839-A4C5-46E9-9511-6A2A9FA326F7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITOps.ViewModelComposition.Mvc", "ITOps.ViewModelComposition.Mvc\ITOps.ViewModelComposition.Mvc.csproj", "{98F40364-2A2A-454F-AFC3-933D7CE2D342}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITOps.ViewModelComposition.Mvc", "..\it-ops-shared\ITOps.ViewModelComposition.Mvc\ITOps.ViewModelComposition.Mvc.csproj", "{98F40364-2A2A-454F-AFC3-933D7CE2D342}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompositionGateway", "CompositionGateway\CompositionGateway.csproj", "{53B2AB52-971B-4358-B7AD-4B2ACDE2A98D}"
 EndProject
