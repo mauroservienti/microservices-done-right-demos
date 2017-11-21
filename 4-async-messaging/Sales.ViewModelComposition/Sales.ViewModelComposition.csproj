@@ -5,12 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NServiceBus" Version="7.0.0-beta0001" />
+    <PackageReference Include="NServiceBus" Version="7.0.0-beta0008" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ITOps.ViewModelComposition.Json\ITOps.ViewModelComposition.Json.csproj" />
-    <ProjectReference Include="..\ITOps.ViewModelComposition\ITOps.ViewModelComposition.csproj" />
+    <ProjectReference Include="..\..\it-ops-shared\ITOps.ViewModelComposition.Json\ITOps.ViewModelComposition.Json.csproj" />
+    <ProjectReference Include="..\..\it-ops-shared\ITOps.ViewModelComposition\ITOps.ViewModelComposition.csproj" />
     <ProjectReference Include="..\Sales.Messages.Commands\Sales.Messages.Commands.csproj" />
     <ProjectReference Include="..\Sales.ViewModelComposition.Events\Sales.ViewModelComposition.Events.csproj" />
   </ItemGroup>
