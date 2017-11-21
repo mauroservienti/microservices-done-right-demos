@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Sales.API.Handlers
+namespace Sales.Services.Handlers
 {
     class InactiveCartWipedHandler : IHandleMessages<InactiveCartWiped>
     {

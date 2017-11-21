@@ -42,7 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CleanupCartHandler.cs" />
+    <Compile Include="Handlers\CleanupCartHandler.cs" />
+    <Compile Include="Handlers\InactiveCartWipedHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -61,6 +62,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Marketing.Messages.Events\Marketing.Messages.Events.csproj">
+      <Project>{195DB39E-B564-4196-8C69-29D4BCEF3093}</Project>
+      <Name>Marketing.Messages.Events</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shipping.Data\Shipping.Data.csproj">
       <Project>{5b3f8e09-72ce-4101-afab-f0f721a4ef89}</Project>
       <Name>Shipping.Data</Name>

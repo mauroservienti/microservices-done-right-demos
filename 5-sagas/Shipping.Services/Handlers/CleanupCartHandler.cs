@@ -4,7 +4,7 @@ using Shipping.Messages.Commands;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shipping.Services
+namespace Shipping.Services.Handlers
 {
     class CleanupCartHandler : IHandleMessages<CleanupCart>
     {

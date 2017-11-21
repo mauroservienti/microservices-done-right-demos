@@ -49,6 +49,7 @@
                 "Marketing.API": {},
                 "Marketing.Services": {},
                 "Sales.API": {},
+                "Sales.Services": {},
                 "Warehouse.API": {},
                 "Warehouse.Services": {},
                 "Shipping.API": {},

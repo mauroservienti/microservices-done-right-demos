@@ -5,7 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Sales.Services
+namespace Sales.Services.Handlers
 {
     class CleanupCartHandler : IHandleMessages<CleanupCart>
     {

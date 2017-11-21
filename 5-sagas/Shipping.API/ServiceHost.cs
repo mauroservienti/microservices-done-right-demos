@@ -13,8 +13,7 @@ namespace Shipping.API
             var baseAddress = ConfigurationManager.AppSettings["baseAddress"];
 
             webApp = WebApp.Start<Startup>(url: baseAddress);
-            ServiceBus.Start();
-
+            
             Console.WriteLine($"Shipping.API listening on {baseAddress}");
         }
 
@@ -23,7 +22,6 @@ namespace Shipping.API
             if (webApp != null)
             {
                 webApp.Dispose();
-                ServiceBus.Instance?.Stop().GetAwaiter().GetResult();
             }
         }
     }

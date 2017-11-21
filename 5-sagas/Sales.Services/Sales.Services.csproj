@@ -42,7 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CleanupCartHandler.cs" />
+    <Compile Include="Handlers\CleanupCartHandler.cs" />
+    <Compile Include="Handlers\InactiveCartWipedHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -51,16 +52,20 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="EntityFramework">
-      <Version>6.1.3</Version>
+      <Version>6.2.0</Version>
     </PackageReference>
     <PackageReference Include="NServiceBus">
-      <Version>6.4.0</Version>
+      <Version>6.4.2</Version>
     </PackageReference>
     <PackageReference Include="NServiceBus.Newtonsoft.Json">
       <Version>1.1.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Marketing.Messages.Events\Marketing.Messages.Events.csproj">
+      <Project>{195DB39E-B564-4196-8C69-29D4BCEF3093}</Project>
+      <Name>Marketing.Messages.Events</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Sales.Data\Sales.Data.csproj">
       <Project>{c38d4793-32c7-4bf7-98c0-1bf1a48e9e89}</Project>
       <Name>Sales.Data</Name>
