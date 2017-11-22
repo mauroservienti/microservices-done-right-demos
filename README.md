@@ -1,5 +1,17 @@
 # Microservices Done Right - Demos
 
+A microservices powered e-commerce shopping cart set of samples - based on SOA principles.
+
+Samples are designed to demo 5 different topics:
+
+1. [Single item ViewModel composition](1-a-product/): how to compose data coming from different services
+1. [ViewModel decomposition](2-add-to-cart/): how to handle a form post where data should go to different services
+1. [List ViewModel composition](3-view-cart/): how to compose a list of items where each item is composed of data coming from different services
+1. [Async Messaging](4-async-messaging/): how to use async messaging to achieve:
+   * intra-service copmmunication
+   * error handling and recovery when dealing with ViewModel decomposition
+1. [Long running processes and sagas](5-sagas/): how to use sagas to handle things like stale carts clean up
+
 ## How to get the sample working locally
 
 ### Get a copy of this repository
