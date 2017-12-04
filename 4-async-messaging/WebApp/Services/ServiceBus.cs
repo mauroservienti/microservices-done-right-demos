@@ -7,7 +7,7 @@ namespace WebApp.Services
     {
         public static void AddNServiceBus(this IServiceCollection services)
         {
-            var config = new EndpointConfiguration("Sales.API");
+            var config = new EndpointConfiguration("WebApp");
             config.UseSerialization<NewtonsoftSerializer>();
             config.UseTransport<LearningTransport>();
             config.SendFailedMessagesTo("error");
