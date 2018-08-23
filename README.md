@@ -8,7 +8,7 @@ Samples are designed to demo 5 different topics:
 1. [ViewModel decomposition](2-add-to-cart/): how to handle a form post where data should go to different services
 1. [List ViewModel composition](3-view-cart/): how to compose a list of items where each item is composed of data coming from different services
 1. [Async Messaging](4-async-messaging/): how to use async messaging to achieve:
-   * intra-service copmmunication
+   * intra-service communication
    * error handling and recovery when dealing with ViewModel decomposition
 1. [Long running processes and sagas](5-sagas/): how to use sagas to handle things like stale carts clean up
 
