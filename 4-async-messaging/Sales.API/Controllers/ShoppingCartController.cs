@@ -1,7 +1,6 @@
 ﻿using NServiceBus;
 using Sales.Data.Context;
 using Sales.Data.Models;
-using Sales.Messages.Events;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -50,12 +49,6 @@ namespace Sales.API.Controllers
                         ProductId = productId,
                         ProductPrice = product.Price,
                         Quantity = quantity
-                    });
-
-                    await ServiceBus.Instance.Publish<ProductAddedToCart>(e =>
-                    {
-                        e.CartId = cartId;
-                        e.ProductId = productId;
                     });
                 }
 

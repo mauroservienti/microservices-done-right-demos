@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Newtonsoft.Json;
 using NServiceBus;
-using Shipping.Messages.Commands;
 using System;
 using System.Net.Http;
 using System.Text;
@@ -59,12 +58,7 @@ namespace Shipping.ViewModelComposition
 
         public Task OnRequestError(string requestId, Exception ex, dynamic vm, RouteData routeData, HttpRequest request)
         {
-            return messageSession.Send("Shipping.Services", new CleanupCart()
-            {
-                ProductId = int.Parse((string)routeData.Values["id"]),
-                CartId = 1, //this should come from a cookie or from a session or stored in the user account
-                RequestId = requestId
-            });
+            return Task.CompletedTask;
         }
     }
 }
