@@ -16,7 +16,7 @@ namespace Marketing.Services
         static async Task MainAsync(string endpointName)
         {
             var config = new EndpointConfiguration(endpointName);
-            config.UsePersistence<LearningPersistence>();
+
             config.UseTransport<LearningTransport>();
             config.UseSerialization<NewtonsoftSerializer>();
             config.SendFailedMessagesTo("error");
